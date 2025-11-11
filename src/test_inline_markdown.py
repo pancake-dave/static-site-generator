@@ -4,7 +4,8 @@ from inline_markdown import (
     extract_markdown_images,
     extract_markdown_links,
     split_nodes_image,
-    split_nodes_link
+    split_nodes_link,
+    text_to_textnodes
 )
 
 from textnode import TextNode, TextType
@@ -331,6 +332,24 @@ class TestSplitEdgeCases(unittest.TestCase):
             TextNode("a b", TextType.IMAGE, "u1"),
             TextNode("c d", TextType.LINK, "u2"),
         ])
+
+class TestTextToTextNodes(unittest.TestCase):
+    def test_all_functions(self):
+        text = "This is **text** with an _italic_ word and a `code block` and an ![obi wan image](https://i.imgur.com/fJRm4Vk.jpeg) and a [link](https://boot.dev)"
+        nodes = text_to_textnodes(text)
+        result = [
+                    TextNode("This is ", TextType.TEXT),
+                    TextNode("text", TextType.BOLD),
+                    TextNode(" with an ", TextType.TEXT),
+                    TextNode("italic", TextType.ITALIC),
+                    TextNode(" word and a ", TextType.TEXT),
+                    TextNode("code block", TextType.CODE),
+                    TextNode(" and an ", TextType.TEXT),
+                    TextNode("obi wan image", TextType.IMAGE, "https://i.imgur.com/fJRm4Vk.jpeg"),
+                    TextNode(" and a ", TextType.TEXT),
+                    TextNode("link", TextType.LINK, "https://boot.dev"),
+        ]
+        self.assertEqual(nodes, result)
 
 
 if __name__ == "__main__":
