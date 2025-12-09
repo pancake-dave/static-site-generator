@@ -29,7 +29,9 @@ def block_to_html_node(block):
 
 
 def paragraph_to_html_node(block):
-    normalized_block = normalize(block)
+    lines = block.splitlines()
+    stripped_lines = [line.strip() for line in lines]
+    normalized_block =  " ".join(stripped_lines)
     return ParentNode(tag="p", children=text_to_children(normalized_block))
 
 def heading_to_html_node(block):
@@ -75,11 +77,6 @@ def text_to_children(text):
     for node in text_nodes:
         html_nodes.append(text_node_to_html_node(node))
     return html_nodes
-
-def normalize(text):
-    lines = text.splitlines()
-    stripped_lines = [line.strip() for line in lines]
-    return " ".join(stripped_lines)
 
 def parse_list_elements(elements):
     result = []
