@@ -5,5 +5,3 @@ def main():
     print(node)
 
 main()
-
-# only this line
