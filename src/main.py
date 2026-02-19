@@ -1,11 +1,11 @@
 from textnode import TextNode, TextType
-from copy_contents import purge_public, copy_content
+from copy_static import purge_public, copy_static
 
 def main():
     node = TextNode("Dummy text", TextType.LINK, "www.placek.com")
     print(node)
 
     if purge_public():
-        copy_content()
+        copy_static()
 
 main()

@@ -12,7 +12,7 @@ def purge_public():
     except Exception as e:
         print(f"Fatal error: failed to purge '{public_path}' due to: {e}")
 
-def copy_content(path_public="", path_static=""):
+def copy_static(path_public="", path_static=""):
     current_public_path = "./public/" + path_public
     current_static_path = "./static/" + path_static
     try:
@@ -22,6 +22,6 @@ def copy_content(path_public="", path_static=""):
             else:
                 if not os.path.exists(os.path.join(current_public_path, item)):
                     os.mkdir(os.path.join(current_public_path, item))
-                copy_content(os.path.join(path_public, item), os.path.join(path_static, item))
+                copy_static(os.path.join(path_public, item), os.path.join(path_static, item))
     except Exception as e:
         print(f"Fatal error: failed to generate content due to: {e}")
