@@ -1,14 +1,14 @@
 from textnode import TextNode, TextType
 from copy_static import purge_public, copy_static
 from generate_page import generate_page
+from generate_pages_recursive import generate_pages_recursive
 
 def main():
-    node = TextNode("Dummy text", TextType.LINK, "www.placek.com")
-    print(node)
-
+    print("Purging public directory...")
     if purge_public():
+        print("Copying static files to public directory...")
         copy_static()
 
-    generate_page("./content/index.md", "./template.html", "./public/index.html")
+    generate_pages_recursive("./content", "./template.html", "./public")
 
 main()

@@ -13,5 +13,9 @@ def generate_page(from_path, template_path, dest_path):
     html_content = markdown_to_html_node(content).to_html()
     title = extract_title_md(lines)
     generated_html = template.replace("{{ Title }}", title).replace("{{ Content }}", html_content)
-    with open(dest_path, "x") as new_page:
+    dest_dir_path = os.path.dirname(dest_path)
+    if dest_dir_path != "":
+        os.makedirs(dest_dir_path, exist_ok=True)
+
+    with open(dest_path, "w") as new_page:
         new_page.write(generated_html)
