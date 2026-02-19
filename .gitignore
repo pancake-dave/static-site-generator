@@ -3,5 +3,4 @@
 __pycache__/
 **/__pycache__/
 *.pyc
-public/
 /src/purge_temp.py
